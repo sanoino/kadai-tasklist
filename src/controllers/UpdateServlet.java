@@ -32,11 +32,11 @@ public class UpdateServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String _token = request.getParameter("_token");
-        if(_token != null && _token.equals(request.getSession().getId()));
+        if(_token != null && _token.equals(request.getSession().getId())) {
         EntityManager em = DBUtil.createEntityManager();
 
-        // セッションスコープからメッセージIDを取得して
-        // 該当IDのメッセージ1件のみをデータベースから取得
+        // セッションスコープからタスクIDを取得して
+        // 該当IDのタスク1件のみをデータベースから取得
         Task t = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
 
         // フォームの内容を鶴フィールドに上書き
@@ -58,4 +58,5 @@ public class UpdateServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath() + "/index");
         }
 
+}
 }
